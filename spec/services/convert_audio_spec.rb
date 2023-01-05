@@ -17,7 +17,12 @@ RSpec.describe Services::AudioConversionService, type: :service do
       end
 
       it 'with file_name empty' do
-        service = Services::AudioConversionService.new(file_name: nil, to: 'mp3')
+        service = Services::AudioConversionService.new(file_name: '', to: 'mp3')
+        expect { service.execute }.to raise_error(CustomnExepection::AudioConversionExepection)
+      end
+
+      it 'codec not suported' do
+        service = Services::AudioConversionService.new(file_name: 'output', to: 'mp4')
         expect { service.execute }.to raise_error(CustomnExepection::AudioConversionExepection)
       end
     end
