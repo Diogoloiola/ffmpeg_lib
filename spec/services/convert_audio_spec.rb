@@ -5,24 +5,27 @@ RSpec.describe Services::AudioConversionService, type: :service do
   describe '#execute' do
     context 'with valid values' do
       it 'correct result' do
-        service = Services::AudioConversionService.new(file_name: 'output', to: 'mp3')
+        service = Services::AudioConversionService.new(input_file_name: 'input', output_file_name: 'output',
+                                                       to_format: 'mp3')
         expect(service.execute).to eql('output.mp3')
       end
     end
 
     context 'with wrong params' do
-      it 'with file_name nil' do
-        service = Services::AudioConversionService.new(file_name: nil, to: 'mp3')
+      it 'with input_file_name nil' do
+        service = Services::AudioConversionService.new(input_file_name: nil, output_file_name: 'output',
+                                                       to_format: 'mp3')
         expect { service.execute }.to raise_error(CustomnExepection::AudioConversionExepection)
       end
 
-      it 'with file_name empty' do
-        service = Services::AudioConversionService.new(file_name: '', to: 'mp3')
+      it 'with input_file_name empty' do
+        service = Services::AudioConversionService.new(input_file_name: '', output_file_name: '', to_format: 'mp3')
         expect { service.execute }.to raise_error(CustomnExepection::AudioConversionExepection)
       end
 
       it 'codec not suported' do
-        service = Services::AudioConversionService.new(file_name: 'output', to: 'mp4')
+        service = Services::AudioConversionService.new(input_file_name: 'input', output_file_name: nil,
+                                                       to_format: 'mp4')
         expect { service.execute }.to raise_error(CustomnExepection::AudioConversionExepection)
       end
     end

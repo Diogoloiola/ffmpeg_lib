@@ -14,32 +14,34 @@ module Services
       dvaudio
     ].freeze
 
-    def initialize(file_name:, to:)
-      @file_name = file_name
-      @to = to
+    def initialize(input_file_name:, output_file_name:, to_format:, codec: 128)
+      @input_file_name = input_file_name
+      @output_file_name = output_file_name
+      @to_format = to_format
+      @codec = codec
     end
 
     def execute
       validate_all!
 
-      "#{@file_name}.#{@to}"
+      "#{@output_file_name}.#{@to_format}"
     end
 
     private
 
     def validate_all!
-      validate_file_name
+      validate_output_file_name
       validate_format
     end
 
-    def validate_file_name
-      return unless @file_name.nil? || @file_name.empty?
+    def validate_output_file_name
+      return unless @output_file_name.nil? || @output_file_name.empty?
 
       raise CustomnExepection::AudioConversionExepection, 'Error. File name nil or empty'
     end
 
     def validate_format
-      return if CODECS.include?(@to)
+      return if CODECS.include?(@to_format)
 
       raise CustomnExepection::AudioConversionExepection, 'Error. Codec not supported'
     end
