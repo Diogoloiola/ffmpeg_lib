@@ -10,10 +10,14 @@ module Services
       @bitrate = bitrate
     end
 
-    def execute
+    def create_command
       validate_all!
 
       "ffmpeg -i #{@input_file_name} -b:a #{@bitrate}k #{@output_file_name}.#{@to_format}"
+    end
+
+    def execute
+      system(create_command)
     end
 
     private
