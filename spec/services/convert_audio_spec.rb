@@ -13,7 +13,7 @@ RSpec.describe Services::AudioConversionService, type: :service do
 
     context 'with wrong params' do
       it 'with input_file_name nil' do
-        service = Services::AudioConversionService.new(input_file_name: nil, output_file_name: 'output',
+        service = Services::AudioConversionService.new(input_file_name: nil, output_file_name: nil,
                                                        to_format: 'mp3')
         expect { service.execute }.to raise_error(CustomnExepection::AudioConversionExepection)
       end
