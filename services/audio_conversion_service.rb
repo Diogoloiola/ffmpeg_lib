@@ -1,22 +1,8 @@
 require_relative '../custom_exceptions/audio_conversion_expection'
 require_relative '../custom_exceptions/audio_bitrate_expection'
-
+require_relative '../constants/audio'
 module Services
   class AudioConversionService
-    BITRATE = [64, 128, 256, 320, 1411, 4608, 9216].freeze
-
-    CODECS = %w[
-      ogg
-      mp1
-      mp2
-      mp3
-      wav
-      mp3adu
-      hcom
-      iac
-      dvaudio
-    ].freeze
-
     def initialize(input_file_name:, output_file_name:, to_format:, bitrate: 128)
       @input_file_name = input_file_name
       @output_file_name = output_file_name
