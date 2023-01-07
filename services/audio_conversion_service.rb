@@ -1,7 +1,7 @@
 require_relative '../custom_exceptions/audio_conversion_expection'
 require_relative '../custom_exceptions/audio_bitrate_expection'
 require_relative '../constants/audio'
-module Services
+module Lib
   class AudioConversionService
     def initialize(input_file_name:, output_file_name:, to_format:, bitrate: 128)
       @input_file_name = input_file_name
